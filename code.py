@@ -29,7 +29,7 @@ def swap_in_list(lr):
     return l
 
 def printMat(mat):
-    prints("\nИсходная матрица: ")
+    prints("Исходная матрица: ")
     for row in mat:
         #pass
         prints(row)
@@ -93,10 +93,11 @@ def main():
         for t0 in T:
             for k0 in K:
                 t,k = t0,k0
-                prints("Исходное решение: \ns = {0}, f(s) = {1}\nИсходная t = {2}\nКоэффициент понижения k = {3}\n".format(s, f(matrix, s), t, k))
+                prints("t = {0}, k = {1}".format(t,k))
+                prints("Исходное решение: \ns = {0}, f(s) = {1}".format(s, f(matrix, s)))
                 step = 1
                 while t>k:
-                    prints("Итерация {2}\ns = {0}, f(s) = {1}".format(s, f(matrix, s), step))
+                    #prints("Итерация {2}\ns = {0}, f(s) = {1}".format(s, f(matrix, s), step))
                     step+=1
                     for i in range(L):
                         s1 = swap_in_list(s)
@@ -108,9 +109,9 @@ def main():
                             p =exp(-delta/t)
                             if r<p:
                                 s=s1     
-                    prints("s' = {0}, f(s) = {1}\n".format(s, f(matrix, s)))           
+                    #prints("s' = {0}, f(s) = {1}\n".format(s, f(matrix, s)))           
                     t*=k
-                prints("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при T = {3}\n".format(s, f(matrix,s),step, round(t,3)))
+                prints("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при t = {3}\n".format(s, f(matrix,s),step, round(t,3)))
                 s = s0
 
         outputFile()
