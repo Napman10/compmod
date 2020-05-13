@@ -3,6 +3,16 @@ from random import random as rndbl
 from math import exp
 
 inf = '∞'
+outputText = ""
+
+def outputFile():
+    with open("output.txt", "w", encoding='utf-8') as file:
+        file.write(outputText)
+
+def prints(string=""):
+    global outputText
+    outputText+="\n{0}".format(str(string))
+    print(string)
 
 def swap_in_list(lr):
     l = list(lr)
@@ -19,10 +29,11 @@ def swap_in_list(lr):
     return l
 
 def printMat(mat):
-    print("\nИсходная матрица: ")
-    for i in mat:
-        print(i)
-    print()
+    prints("\nИсходная матрица: ")
+    for row in mat:
+        #pass
+        prints(row)
+    prints()
 
 def f(matrix, solution):
     sum = 0
@@ -82,10 +93,10 @@ def main():
             for k0 in K:
                 for L0 in llist:
                     t,k,L = t0,k0,L0
-                    print("Исходное решение: \ns = {0}, f(s) = {1}\nИсходная t = {2}\nКоэффициент понижения k = {3}\n".format(s, f(matrix, s), t, k))
+                    prints("Исходное решение: \ns = {0}, f(s) = {1}\nИсходная t = {2}\nКоэффициент понижения k = {3}\n".format(s, f(matrix, s), t, k))
                     step = 1
                     while t>k:
-                        print("Итерация {2}\ns = {0}, f(s) = {1}".format(s, f(matrix, s), step))
+                        prints("Итерация {2}\ns = {0}, f(s) = {1}".format(s, f(matrix, s), step))
                         step+=1
                         for i in range(L):
                             s1 = swap_in_list(s)
@@ -97,8 +108,9 @@ def main():
                                 p =exp(-delta/t)
                                 if r<p:
                                     s=s1     
-                        print("s' = {0}, f(s) = {1}\n".format(s, f(matrix, s)))           
+                        prints("s' = {0}, f(s) = {1}\n".format(s, f(matrix, s)))           
                         t*=k
-                print("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при T = {3}\n".format(s, f(matrix,s),step, round(t,3)))
+                prints("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при T = {3}\n".format(s, f(matrix,s),step, round(t,3)))
+        outputFile()
 
 main()
