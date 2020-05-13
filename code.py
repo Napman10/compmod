@@ -110,7 +110,7 @@ def main():
                                     s=s1     
                         prints("s' = {0}, f(s) = {1}\n".format(s, f(matrix, s)))           
                         t*=k
-                prints("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при T = {3}\n".format(s, f(matrix,s),step, round(t,3)))
+                    prints("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при T = {3}\n".format(s, f(matrix,s),step, round(t,3)))
         outputFile()
 
 main()
