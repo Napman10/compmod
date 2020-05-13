@@ -13,7 +13,6 @@ def swap_in_list(lr):
         second = rand(1, n)
         if first!=second:
             break
-    print("Меняем местами {0} и {1}".format(l[first],l[second]))
     temp = l[first] 
     l[first] = l[second]
     l[second] = temp
@@ -65,10 +64,10 @@ def generate_symmetric_matrix(n, auto=True):
 
 def main():
     while True:
-        x = int(input("Выберите действие:\n1. Ввести матрицу самостоятельно\n2. Сгенерировать автоматически\nпо умолчанию. Выход\nВаш выбор: "))
-        if x==1:
+        x = input("Выберите действие:\n1. Ввести матрицу самостоятельно\n2. Сгенерировать автоматически\nпо умолчанию. Выход\nВаш выбор: ")
+        if x=='1':
             auto = False
-        elif x==2:
+        elif x=='2':
             auto = True
         else:
             break
@@ -76,7 +75,7 @@ def main():
         matrix = generate_symmetric_matrix(n, auto)
         printMat(matrix)
         t = input("Введите t (оставьте поле пустым для t = 1000): ")
-        K = input("Введите k (оставьте поле пустым для k = 0.7: ")
+        K = input("Введите k (оставьте поле пустым для k = 0.7: \n")
         if t == '':
             T = 1000
         else:
@@ -91,25 +90,17 @@ def main():
         while T>k:
             print("Итерация {2}\ns = {0}, f(s) = {1}".format(s, f(matrix, s), step))
             step+=1
-            s1 = swap_in_list(s)
-            print("s' = {0}, f(s') = {1}".format(s1, f(matrix, s1)))
-            delta = f(matrix, s1) - f(matrix, s)
-            print("delta = {0} - {1} = {2}".format(f(matrix, s1), f(matrix, s), delta))
-            if delta<=0:                
-                s = s1 
-                print("delta <= 0\nновое решение s = {0}, f(s) = {1}".format(s, f(matrix, s)))      
-            else:
-                r = rndbl()
-                p =exp(-delta/T)
-                print("delta > 0\nr = {0}, exp(-delta/T) = {1}".format(round(r,3), round(p,3)))
-                if r<p:
-                    s=s1
-                    print("r<exp(-delta/T)\nновое решение s = {0}, f(s) = {1}".format(s, f(matrix, s)))
+            for i in range(500):
+                s1 = swap_in_list(s)
+                delta = f(matrix, s1) - f(matrix, s)
+                if delta<=0:                
+                    s = s1     
                 else:
-                    print("r>exp(-delta/T)\nРешение не изменилось")
-                    
+                    r = rndbl()
+                    p =exp(-delta/T)
+                    if r<p:
+                        s=s1                   
             T*=k
-            print("новая t = {0}\n".format(round(T,3)))
-        print("Оптимальное решение\ns = {0}; f(s) = {1}\n".format(s, f(matrix,s)))
+        print("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при T = {3}\n".format(s, f(matrix,s),step, round(T,3)))
 
 main()
