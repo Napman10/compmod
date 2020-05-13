@@ -87,10 +87,11 @@ def main():
         s = generate_random_solution(n)
         print("Исходное решение: \ns = {0}, f(s) = {1}\nИсходная t = {2}\nКоэффициент понижения k = {3}\n".format(s, f(matrix, s), T, k))
         step = 1
+        L = 500
         while T>k:
             print("Итерация {2}\ns = {0}, f(s) = {1}".format(s, f(matrix, s), step))
             step+=1
-            for i in range(500):
+            for i in range(L):
                 s1 = swap_in_list(s)
                 delta = f(matrix, s1) - f(matrix, s)
                 if delta<=0:                
