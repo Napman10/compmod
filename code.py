@@ -76,14 +76,14 @@ def main():
         printMat(matrix)
         t = input("Введите t (оставьте поле пустым для t = 1000): ")
         K = input("Введите k (оставьте поле пустым для k = 0.7: \n")
-        if t == '':
-            T = 1000
-        else:
+        try:
             T = int(t)
-        if K == '':
-            k = 0.7
-        else:
+        except:
+            T = 1000
+        try:
             k = float(K)
+        except:
+            k = 0.7
         s = generate_random_solution(n)
         print("Исходное решение: \ns = {0}, f(s) = {1}\nИсходная t = {2}\nКоэффициент понижения k = {3}\n".format(s, f(matrix, s), T, k))
         step = 1
@@ -99,7 +99,8 @@ def main():
                     r = rndbl()
                     p =exp(-delta/T)
                     if r<p:
-                        s=s1                   
+                        s=s1     
+            print("s' = {0}, f(s) = {1}\n".format(s, f(matrix, s)))           
             T*=k
         print("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при T = {3}\n".format(s, f(matrix,s),step, round(T,3)))
 
