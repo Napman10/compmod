@@ -74,35 +74,31 @@ def main():
         n = int(input("Введите размер матрицы: "))
         matrix = generate_symmetric_matrix(n, auto)
         printMat(matrix)
-        t = input("Введите t (оставьте поле пустым для t = 1000): ")
-        K = input("Введите k (оставьте поле пустым для k = 0.7: \n")
-        try:
-            T = int(t)
-        except:
-            T = 1000
-        try:
-            k = float(K)
-        except:
-            k = 0.7
+        T = [800,900,1000]
+        K = [0.5,0.6,0.7]
+        llist = [800,900,1000]
         s = generate_random_solution(n)
-        print("Исходное решение: \ns = {0}, f(s) = {1}\nИсходная t = {2}\nКоэффициент понижения k = {3}\n".format(s, f(matrix, s), T, k))
-        step = 1
-        L = 500
-        while T>k:
-            print("Итерация {2}\ns = {0}, f(s) = {1}".format(s, f(matrix, s), step))
-            step+=1
-            for i in range(L):
-                s1 = swap_in_list(s)
-                delta = f(matrix, s1) - f(matrix, s)
-                if delta<=0:                
-                    s = s1     
-                else:
-                    r = rndbl()
-                    p =exp(-delta/T)
-                    if r<p:
-                        s=s1     
-            print("s' = {0}, f(s) = {1}\n".format(s, f(matrix, s)))           
-            T*=k
-        print("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при T = {3}\n".format(s, f(matrix,s),step, round(T,3)))
+        for t0 in T:
+            for k0 in K:
+                for L0 in llist:
+                    t,k,L = t0,k0,L0
+                    print("Исходное решение: \ns = {0}, f(s) = {1}\nИсходная t = {2}\nКоэффициент понижения k = {3}\n".format(s, f(matrix, s), t, k))
+                    step = 1
+                    while t>k:
+                        print("Итерация {2}\ns = {0}, f(s) = {1}".format(s, f(matrix, s), step))
+                        step+=1
+                        for i in range(L):
+                            s1 = swap_in_list(s)
+                            delta = f(matrix, s1) - f(matrix, s)
+                            if delta<=0:                
+                                s = s1     
+                            else:
+                                r = rndbl()
+                                p =exp(-delta/t)
+                                if r<p:
+                                    s=s1     
+                        print("s' = {0}, f(s) = {1}\n".format(s, f(matrix, s)))           
+                        t*=k
+                print("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при T = {3}\n".format(s, f(matrix,s),step, round(t,3)))
 
 main()
