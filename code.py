@@ -89,11 +89,12 @@ def main():
         K = [0.5,0.6,0.7]
         llist = [800,900,1000]
         s = generate_random_solution(n)
+        s0 = list(s)
         for t0 in T:
             for k0 in K:
                 for L0 in llist:
                     t,k,L = t0,k0,L0
-                    prints("Исходное решение: \ns = {0}, f(s) = {1}\nИсходная t = {2}\nКоэффициент понижения k = {3}\n".format(s, f(matrix, s), t, k))
+                    prints("Исходное решение: \ns = {0}, f(s) = {1}\nИсходная t = {2}\nКоэффициент понижения k = {3}\nРазмер цикла L = {4}".format(s, f(matrix, s), t, k, L))
                     step = 1
                     while t>k:
                         prints("Итерация {2}\ns = {0}, f(s) = {1}".format(s, f(matrix, s), step))
@@ -111,6 +112,7 @@ def main():
                         prints("s' = {0}, f(s) = {1}\n".format(s, f(matrix, s)))           
                         t*=k
                     prints("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при T = {3}\n".format(s, f(matrix,s),step, round(t,3)))
+                    s = s0
         outputFile()
 
 main()
