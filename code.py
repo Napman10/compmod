@@ -1,6 +1,7 @@
 from random import randint as rand
 from random import random as rndbl
 from math import exp
+import matplotlib.pyplot as plt
 
 inf = '∞'
 outputText = ""
@@ -31,7 +32,6 @@ def swap_in_list(lr):
 def printMat(mat):
     prints("Исходная матрица: ")
     for row in mat:
-        #pass
         prints(row)
     prints()
 
@@ -85,19 +85,21 @@ def main():
         n = int(input("Введите размер матрицы: "))
         matrix = generate_symmetric_matrix(n, auto)
         printMat(matrix)
-        T = [800,900,1000]
-        K = [0.5,0.6,0.7]
+        T = [800,1200,1800]
+        K = [0.5,0.7,0.9]
         L = 500
         s = generate_random_solution(n)
         s0 = list(s)
+        colors = ['r','g','b']
+        fig = plt.Figure()
         for t0 in T:
+            line = list()
             for k0 in K:
                 t,k = t0,k0
                 prints("t = {0}, k = {1}".format(t,k))
                 prints("Исходное решение: \ns = {0}, f(s) = {1}".format(s, f(matrix, s)))
                 step = 1
-                while t>k:
-                    #prints("Итерация {2}\ns = {0}, f(s) = {1}".format(s, f(matrix, s), step))
+                while t>k:                  
                     step+=1
                     for i in range(L):
                         s1 = swap_in_list(s)
@@ -108,12 +110,17 @@ def main():
                             r = rndbl()
                             p =exp(-delta/t)
                             if r<p:
-                                s=s1     
-                    #prints("s' = {0}, f(s) = {1}\n".format(s, f(matrix, s)))           
+                                s=s1              
                     t*=k
                 prints("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при t = {3}\n".format(s, f(matrix,s),step, round(t,3)))
-                s = s0
-
+                line.append([k0,f(matrix,s)])
+                s = s0  
+            plt.plot(line, color=colors.pop())    
+        plt.xlabel("k", fontsize=14, fontweight="bold")
+        plt.ylabel("f(s)", fontsize=14, fontweight="bold")
+        plt.legend((u'T=800', u'T=1200',u'T=1800'), frameon=True)
+        plt.show()
+        plt.savefig('pic.png')
         outputFile()
 
 main()
