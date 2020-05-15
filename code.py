@@ -109,7 +109,7 @@ def main():
                             r = rndbl()
                             p =exp(-delta/t)
                             if r<p:
-                                s=s1              
+                                s=s1             
                     t*=k
                 prints("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при t = {3}\n".format(s, f(matrix,s),step, round(t,3)))
                 solves.append(f(matrix, s))
