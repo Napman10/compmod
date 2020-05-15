@@ -91,9 +91,8 @@ def main():
         s = generate_random_solution(n)
         s0 = list(s)
         colors = ['r','g','b']
-        fig = plt.Figure()
         for t0 in T:
-            line = list()
+            solves = list()
             for k0 in K:
                 t,k = t0,k0
                 prints("t = {0}, k = {1}".format(t,k))
@@ -113,14 +112,13 @@ def main():
                                 s=s1              
                     t*=k
                 prints("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при t = {3}\n".format(s, f(matrix,s),step, round(t,3)))
-                line.append([k0,f(matrix,s)])
+                solves.append(f(matrix, s))
                 s = s0  
-            plt.plot(line, color=colors.pop())    
+            plt.plot(K,solves, label='T={0}'.format(t0),color=colors.pop())   
+        plt.legend()
         plt.xlabel("k", fontsize=14, fontweight="bold")
         plt.ylabel("f(s)", fontsize=14, fontweight="bold")
-        plt.legend((u'T=800', u'T=1200',u'T=1800'), frameon=True)
         plt.show()
-        plt.savefig('pic.png')
         outputFile()
 
 main()
