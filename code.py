@@ -86,7 +86,7 @@ def main():
         matrix = generate_symmetric_matrix(n, auto)
         printMat(matrix)
         T = [800,1200,1800]
-        K = [0.5,0.7,0.9]
+        K = [0.5,0.6,0.7,0.8,0.9]
         L = 500
         s = generate_random_solution(n)
         s0 = list(s)
@@ -111,7 +111,7 @@ def main():
                             if r<p:
                                 s=s1             
                     t*=k
-                prints("Оптимальное решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при t = {3}\n".format(s, f(matrix,s),step, round(t,3)))
+                prints("Лучшее решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при t = {3}\n".format(s, f(matrix,s),step, round(t,3)))
                 solves.append(f(matrix, s))
                 s = s0  
             plt.plot(K,solves, label='T={0}'.format(t0),color=colors.pop())   
