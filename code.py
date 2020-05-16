@@ -118,7 +118,7 @@ def main():
         plt.legend()
         plt.xlabel("k", fontsize=14, fontweight="bold")
         plt.ylabel("f(s)", fontsize=14, fontweight="bold")
-        plt.show()
         outputFile()
+        plt.show()
 
 main()
