@@ -1,2 +1,6 @@
 output.txt
 *.png
+*.tmp
+*.doc
+!отчет.doc
+/.vscode/*
