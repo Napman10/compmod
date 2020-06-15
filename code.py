@@ -113,7 +113,7 @@ def main():
                     t*=k
                 prints("Лучшее решение\ns = {0}; f(s) = {1}\nЗавершено на итерации номер {2} при t = {3}\n".format(s, f(matrix,s),step, round(t,3)))
                 solves.append(f(matrix, s))
-                s = s0  
+                s = s0 
             plt.plot(K,solves, label='T={0}'.format(t0),color=colors.pop())   
         plt.legend()
         plt.xlabel("k", fontsize=14, fontweight="bold")
