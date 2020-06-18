@@ -143,9 +143,9 @@ def main():
         plt.legend()
         plt.xlabel("k", fontsize=14, fontweight="bold")
         plt.ylabel("f(s)", fontsize=14, fontweight="bold")
-        outputFile()
         prints("Минимальный путь {0} длиной {1} достигнут при t = {2}, k = {3}".format(min_s, f(matrix, min_s), st, sk))
         find_mid(st, sk, L, matrix, 50, n, s0)
+        outputFile()
         plt.show()
 
 main()
